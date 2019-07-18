@@ -8,6 +8,12 @@
 Input: `Hello, there`
 
 Output: `HELLO, THERE`
+```
+var string = "hello there"
+
+var stringUppercase = string.uppercased()
+print(stringUppercase)
+```
 
 2. **Given a String, return a String alternating between uppercase and lowercase letters**
 
@@ -16,13 +22,38 @@ Input: `Hello, there`
 
 Output: `HeLlO, tHeRe`
 
+```
+let string = “Hello, there”
+let stringArray = Array(string)
+
+var stringAlternating = “”
+
+for (index, character) in stringArray.enumerated() {
+    if index % 2 == 0 {
+        stringAlternating.append(contentsOf: String(character.uppercased()))
+    } else {
+        stringAlternating.append(contentsOf: String(character))
+    }
+}
+
+print(stringAlternating)
+```
 
 3. **Given a String, return a String with all occurrences of a given letter removed**
 
 Input: `Hello, there`
 
 Output: `Hllo, thr`
+```
+var string = "hello there"
 
+//let stringArray = Array(string)
+for character in string {
+if character != "e" {
+print (character, terminator: "")
+}
+}
+```
 
 ## Arrays
 
@@ -32,43 +63,150 @@ Output: `Hllo, thr`
 Input: `[1,5,2,4,1,4]`
 
 Output: `5`
+```
 
+let array = [1,5,2,4,1,4]
+var largestNumber = 0
+
+for num in array {
+if num > largestNumber {
+largestNumber = num
+}
+}
+print(largestNumber)
+````
+```
+let array = [1,5,2,4,1,4]
+var largestNumber = 0
+
+//for num in array {
+//    if num > largestNumber {
+//    largestNumber = num
+//    }
+//}
+//print(largestNumber)
+
+if let largestNumber2 = array.max() {
+print(largestNumber2)
+}
+```
 2. **Given an array of type [Int], return the smallest element**
 
 Input: `[1,5,2,4,1,4]`
 
 Output: `1`
+```
+var array = [1,5,2,4,1,4]
+var smallestNumber = 10
 
+for number in array {
+if number < smallestNumber {
+smallestNumber = number
+}
+}
+print(smallestNumber)
+
+//or 
+
+if let smallestNumber2 = array.min(){
+print(smallestNumber2)
+}
+```
 3. **Given an array of type [Int], return its sum**
 
 Input: `[1,5,2,4,1,4]`
 
 Output: `17`
+```
+var array = [1,5,2,4,1,4]
 
+var sum = 0
+
+for number in array {
+sum += number
+}
+print(sum)
+```
 4. **Given an array of type [Double], return its average**
 
 Input: `[3,4.5,7.5,2,1]`
 
 Output: `3.6`
+```
+let array = [3,4.5,7.5,2,1]
+var sum = 0.0
 
+for num in array {
+sum += Double(num)
+}
+
+let average = sum/Double(array.count)
+print(average)
+```
 5. **Given an array of type [Double] and a Double, return the sum of all numbers in the array greater than a given number**
 
 Input: `[3,4.5,7.5,2,1], 3`
 
 Output: `12`
+```
+var array = [3,4.5,7.5,2,1]
+var givenNumber = 3
+var sum = 0.0
 
+func sumIfGreaterThanNum(_ array: [Double], number: Int) ->Int {
+for i in array {
+if i > Double(number){
+sum += i
+}
+}
+return Int(sum)
+}
+let answer = sumIfGreaterThanNum(array, number: givenNumber)
+print(answer)
+```
 
 6. **Given an array of type [Double], return the product of all the elements**
 
 Input: `[3,4.5,7.5,2,1]`
 
 Output: `202.5`
+```
+let array = [3,4.5,7.5,2,1]
+var product = 1.0
 
+func productOfAllElements(_ array: [Double]) -> Double {
+// var product = 1.0
+
+for num in array {
+product *= num
+}
+return product
+}
+
+let answer = productOfAllElements(array)
+print(answer)
+```
 7. **Given an array of type [Int], return the second smallest value in the array**
 
 Input: `[3,6,1,9,4,8]`
 
 Output: `3`
+```
+
+let array = [3,6,1,9,4,8]
+var smallestValue = 1
+var secondSmallestValue = 10
+
+for num in array {
+if num < smallestValue {
+smallestValue = num
+} else if num < secondSmallestValue && num > smallestValue {
+secondSmallestValue = num
+}
+}
+print(smallestValue)
+print(secondSmallestValue)
+```
 
 ## Optionals
 
@@ -78,18 +216,71 @@ Input: `[nil, "We", "come", nil, "in", "peace"]`
 
 Output: `["We", "come", "in", "peace"]`
 
+```
+
+let array = [nil, "We", "come", nil, "in", "peace"]
+var noNilArray = [String]()
+
+func makeNoNilArray (_ array: [String?]) -> [String] {
+var noNilArray = [String]()
+
+for i in array {
+if let iUnwrapped = i {
+noNilArray.append(iUnwrapped)
+}
+}
+return noNilArray
+}
+
+let answer = makeNoNilArray(array)
+print(answer)
+```
 2. **Given an array of type [String?]? return an array of [String] removing all nil values**
 
 Input: `nil`
 
 Output: `[]`
+```
+let array: [String?]? = nil
 
+func removesNil(_ arr: [String?]?) -> [String] {
+var noNilArray = [String]()
+if let arrUnwrapped = arr {
+for element in arrUnwrapped {
+if let elementUnwrapped = element {
+noNilArray.append(elementUnwrapped)
+}
+}
+}
+return noNilArray
+}
+
+let answer = removesNil(array)
+print(answer)
+```
 3. **Given an array of type [Int?] return the sum of all non-nil values.  Use guard statements in your solution.**
 
 Input: `[4, nil, 9, 5, nil]`
 
 Output: `18`
+```
+var array: [Int?] = [4, nil, 9, 5, nil]
 
+func sumOfNonNil(_ arr: [Int?]) -> Int {
+var noNilArray = [Int]()
+for int in arr {
+guard let intUnwrapped = int else {
+continue
+}
+noNilArray.append(intUnwrapped)
+}
+let sum = noNilArray.reduce(0, +)
+return sum
+}
+
+let answer = sumOfNonNil(array)
+print(answer)
+```
 4. **Given an array of type [Int?]? return the sum of all non-nil values.  Use guard statements in your solution.**
 
 Input: `nil`
